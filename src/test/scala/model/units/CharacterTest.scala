@@ -11,7 +11,7 @@ class CharacterTest extends munit.FunSuite:
     archer = Some(new Archer("Pedro", 92, 13, 54, "bow", List("arrow")))
     thief = Some(new Thief("Diego", 80, 5, 30, "knife", List("potion")))
   }
-  
+
   test("Knight fulfills the Character contract"):
     val k = knight.get
     assertEquals(k.name, "Juan")
@@ -43,13 +43,13 @@ class CharacterTest extends munit.FunSuite:
 class MagicCharacterTest extends munit.FunSuite:
   var bwizard: Option[MagicCharacter] = None
   var wwizard: Option[MagicCharacter] = None
-  
+
   override def beforeEach(context: BeforeEach): Unit = {
     bwizard = Some(new BlackWizard("Juan", 90, 10, 55, "wand", List("potion"), 5))
     wwizard = Some(new WhiteWizard("Matias", 80, 5, 60, "wand", List("potion"), 6))
   }
 
-  test("classes extending MagicCharacter fulfill the contract"):
+  test("BlackWizard fulfills the MagicCharacter contract"):
     val b = bwizard.get
     assertEquals(b.name, "Juan")
     assertEquals(b.health, 90)
@@ -68,3 +68,8 @@ class MagicCharacterTest extends munit.FunSuite:
     assertEquals(w.weapon, "staff")
     assertEquals(w.utilities, List("potion"))
     assertEquals(w.mana, 6)
+
+
+
+
+

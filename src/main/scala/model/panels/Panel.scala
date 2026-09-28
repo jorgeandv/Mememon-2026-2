@@ -1,5 +1,5 @@
 package cl.uchile.dcc
-package model.panel
+package model.panels
 
 import model.units.UnitsCommon
 

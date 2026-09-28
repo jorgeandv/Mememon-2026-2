@@ -45,3 +45,15 @@ trait EnemiesContract {
 
 class Enemy(val name: String, val health: Int, val attack: Int, val defense: Int, val weight: Int) extends EnemiesContract {
 }
+
+
+trait Players {
+  def units: List[Strings]
+  def defeated(): Boolean
+}
+
+class Player(val units: List[Strings]){
+  override def defeated(): Boolean = {
+    //It remains to be defined when it is considered defeated.
+  }
+}

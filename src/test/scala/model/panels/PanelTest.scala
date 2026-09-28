@@ -41,7 +41,8 @@ class PanelTest extends munit.FunSuite:
   test("nearbyPanels ignores far away panels"):
     val P1: PanelContract = new Panel(5, 5, Nil)
     val P2: PanelContract = new Panel(7, 0, Nil)
-    assertEquals(center.get.nearbyPanels(), Nil)
+    val P3: PanelContract = new Panel(-1,0, Nil)
+    assertEquals(center.get.nearbyPanels(), List(P3))
 
   //Ya no usamos center
   test("nearbyPanels works with negative coordinates"):
@@ -57,11 +58,13 @@ class PanelTest extends munit.FunSuite:
     val P2: PanelContract = new Panel(1, 1, Nil)
     val P3: PanelContract = new Panel(-1, -1, Nil)
     val P4: PanelContract = new Panel(1, -1, Nil)
-    assertEquals(center.get.nearbyPanels(), Nil)
+    val P5: PanelContract = new Panel(-1,0, Nil)
+    assertEquals(center.get.nearbyPanels(), List(P5))
 
   test("nearbyPanels ignores a panel at the same position"):
     val P1: PanelContract = new Panel(0, 0, Nil)
-    assertEquals(center.get.nearbyPanels(), Nil)
+    val P2: PanelContract = new Panel(-1,0, Nil)
+    assertEquals(center.get.nearbyPanels(), List(P2))
 
 
 

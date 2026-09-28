@@ -18,3 +18,7 @@ trait MagicCharacter extends Character {
 class Knight(val name: String, val health: Int, val defense: Int, val weight:
 Int, val weapon: String, val utilities: List[String]) extends Character {
 }
+
+class Archer(val name: String, val health: Int, val defense: Int, val weight:
+Int, val weapon: String, val utilities: List[String]) extends Character {
+}

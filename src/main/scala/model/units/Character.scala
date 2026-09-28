@@ -10,3 +10,6 @@ trait Character {
   def utilities: List[String]
 }
 
+trait MagicCharacter extends Character {
+  def mana: Int
+}

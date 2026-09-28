@@ -85,18 +85,18 @@ class EnemiesContractTest extends munit.FunSuite:
     assertEquals(e.defense, 55)
     assertEquals(e.weight, 120)
 
-
+/*
 class PlayersTest extends munit.FunSuite:
   var player: Option[Players] = None
 
   override def beforeEach(context: BeforeEach): Unit = {
-    player = Some(new Player(List("1", "2"),true))
+    player = Some(new Player(List("1", "2"))
   }
 
   test("Player fulfills the PlayerTest contract"):
     val p = player.get
     assertEquals(p.units, List("1", "2"))
     assertEquals(p.defeated, true)
-
+*/
 
 

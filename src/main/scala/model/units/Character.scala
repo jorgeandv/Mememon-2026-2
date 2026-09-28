@@ -6,7 +6,7 @@ trait Character {
   def health: Int
   def defense: Int
   def weight: Int
-  def weapon: String
+  def weapon: Weapon
   def utilities: List[String]
 }
 

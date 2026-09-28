@@ -24,8 +24,8 @@ class PanelTest extends munit.FunSuite:
 
   //Cada test parte sin ningún panel y luego con un panel en el centro (panel sin unidades para simplificar)
   override def beforeEach(context: BeforeEach): Unit = {
-    center = Some(new Panel(0,0,Nil))
     PanelsList = Nil
+    center = Some(new Panel(0,0,Nil))
   }
 
   //Test de las particiones

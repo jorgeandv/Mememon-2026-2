@@ -1,5 +1,8 @@
 package cl.uchile.dcc
-package model.units
+package model.usable
+
+import model.units.{Character, Knight}
+import model.usable.*
 
 class WeaponTest extends munit.FunSuite:
   var knight: Option[Character] = None

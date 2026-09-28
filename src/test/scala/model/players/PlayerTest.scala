@@ -1,5 +1,7 @@
 package cl.uchile.dcc
-package model.units
+package model.players
+
+
 
 /*
 class PlayersTest extends munit.FunSuite:

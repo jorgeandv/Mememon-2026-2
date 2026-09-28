@@ -1,5 +1,5 @@
 package cl.uchile.dcc
-package model.units
+package model.players
 
 trait Players {
   def units: List[String]

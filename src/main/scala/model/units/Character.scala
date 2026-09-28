@@ -1,6 +1,8 @@
 package cl.uchile.dcc
 package model.units
 
+import model.usable.Weapon
+
 trait Character {
   def name: String
   def health: Int

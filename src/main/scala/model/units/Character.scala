@@ -16,23 +16,23 @@ trait MagicCharacter extends Character {
 
 
 class Knight(val name: String, val health: Int, val defense: Int, val weight:
-Int, val weapon: String, val utilities: List[String]) extends Character 
+Int, val weapon: Weapon, val utilities: List[String]) extends Character 
 
 
 class Archer(val name: String, val health: Int, val defense: Int, val weight:
-Int, val weapon: String, val utilities: List[String]) extends Character 
+Int, val weapon: Weapon, val utilities: List[String]) extends Character 
 
 
 class Thief(val name: String, val health: Int, val defense: Int, val weight:
-Int, val weapon: String, val utilities: List[String]) extends Character 
+Int, val weapon: Weapon, val utilities: List[String]) extends Character 
 
 
 class BlackWizard(val name: String, val health: Int, val defense: Int, val weight:
-Int, val weapon: String, val utilities: List[String], val mana: Int) extends MagicCharacter 
+Int, val weapon: Weapon, val utilities: List[String], val mana: Int) extends MagicCharacter 
 
 
 class WhiteWizard(val name: String, val health: Int, val defense: Int, val weight:
-Int, val weapon: String, val utilities: List[String], val mana: Int) extends MagicCharacter 
+Int, val weapon: Weapon, val utilities: List[String], val mana: Int) extends MagicCharacter 
 
 
 trait EnemiesContract {

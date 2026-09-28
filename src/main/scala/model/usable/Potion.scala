@@ -1,9 +1,11 @@
 package cl.uchile.dcc
 package model.usable
 
-
-trait Potion:
+trait usableCommon {
   def name: String
+}
+
+trait Potion extends usableCommon
 
 class HealingPotion(val name: String) extends Potion
 

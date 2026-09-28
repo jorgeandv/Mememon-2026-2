@@ -2,9 +2,9 @@ package cl.uchile.dcc
 package model.usable
 
 import model.units.Character
+import model.usable.usableCommon
 
-trait Weapon:
-  def name: String
+trait Weapon extends usableCommon:
   def attack: Int
   def weight: Int
   def owner: Option[Character]

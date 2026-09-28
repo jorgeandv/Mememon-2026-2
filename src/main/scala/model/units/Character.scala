@@ -34,3 +34,11 @@ Int, val weapon: String, val utilities: List[String], val mana: Int) extends Mag
 class WhiteWizard(val name: String, val health: Int, val defense: Int, val weight:
 Int, val weapon: String, val utilities: List[String], val mana: Int) extends MagicCharacter {
 }
+
+trait EnemiesContract {
+  def name: String
+  def health: Int
+  def attack: Int
+  def defense: Int
+  def weight: Int
+}

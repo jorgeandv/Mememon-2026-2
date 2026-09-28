@@ -83,3 +83,16 @@ class Wand(val name: String, val attack: Int, val weight: Int,
 
 class Staff(val name: String, val attack: Int, val weight: Int,
             val owner: Character, val magicAttack: Int) extends MagicWeapon
+
+
+
+trait Potion:
+  def name: String
+
+class HealingPotion(val name: String) extends Potion
+
+class FortitudePotion(val name: String) extends Potion
+
+class ManaPotion(val name: String) extends Potion
+
+class MagicStrengthPotion(val name: String) extends Potion

@@ -1,7 +1,7 @@
 package cl.uchile.dcc
 package model.usable
 
-import model.units.{Character, MagicWeapon, Weapon}
+import model.units.Character
 
 trait Weapon:
   def name: String

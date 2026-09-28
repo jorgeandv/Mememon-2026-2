@@ -1,7 +1,9 @@
 package cl.uchile.dcc
 package model.units
 
-trait EnemiesContract {
+import model.units.UnitsCommon
+
+trait EnemiesContract extends UnitsCommon {
   def name: String
   def health: Int
   def attack: Int

@@ -1,7 +1,6 @@
 package cl.uchile.dcc
 package model.usable
 
-import model.units.Potion
 
 trait Potion:
   def name: String

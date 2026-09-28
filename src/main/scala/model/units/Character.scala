@@ -3,11 +3,14 @@ package model.units
 
 import model.usable.Weapon
 
-trait Character {
+trait UnitsCommon {
   def name: String
   def health: Int
   def defense: Int
   def weight: Int
+}
+
+trait Character extends UnitsCommon {
   def weapon: Option[Weapon]
   def utilities: List[String]
 }

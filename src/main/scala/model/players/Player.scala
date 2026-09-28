@@ -1,8 +1,10 @@
 package cl.uchile.dcc
 package model.players
 
+import model.units.UnitsCommon
+
 trait Players {
-  def units: List[String]
+  def units: List[UnitsCommon]
   def defeated(): Boolean
 }
 

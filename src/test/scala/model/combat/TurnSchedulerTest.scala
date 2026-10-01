@@ -19,8 +19,8 @@ class TurnSchedulerTest extends munit.FunSuite:
     val thief: Character = new Thief("Diego", 5, 5, 5, None, Nil)
     val arrayBufferTest = turnScheduler.get.add(knight, archer, thief)
     assertEquals(arrayBufferTest, ArrayBuffer(knight, archer, thief) )
-  
-  
+
+
   //test de los casos limite
   test("add with zero units"):
     val arrayBufferTest = turnScheduler.get.add()

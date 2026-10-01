@@ -83,5 +83,45 @@ class TurnSchedulerTest extends munit.FunSuite:
   test("maxActionBarUnit without weapon"):
     val knight: Character = new Knight("Juan", 10, 10, 10, None, Nil)
     assertEquals(turnScheduler.get.maxActionBarUnit(knight), 10.0)
+//--
 
+
+  //Test del metodo reset -----
+  //Test de las particiones
+  test("reset sets the action bar of a unit back to 0"):
+    val knight: Character = new Knight("Juan", 10, 10, 10, None, Nil)
+    turnScheduler.get.add(knight)
+    turnScheduler.get.actionBarsMap(knight) = 7
+    turnScheduler.get.reset(knight)
+    assertEquals(turnScheduler.get.actionBarsMap(knight), 0)
+
+  test("reset does not change the action bar of other units"):
+    val knight: Character = new Knight("Juan", 10, 10, 10, None, Nil)
+    val enemy: EnemiesContract = new Enemy("Pedro", 20, 20, 20, 50)
+    turnScheduler.get.add(knight)
+    turnScheduler.get.add(enemy)
+    turnScheduler.get.actionBarsMap(knight) = 7
+    turnScheduler.get.actionBarsMap(enemy) = 12
+    turnScheduler.get.reset(knight)
+    assertEquals(turnScheduler.get.actionBarsMap.toMap, Map[UnitsCommon, Int](knight -> 0, enemy -> 12))
+
+  //test de los casos limite
+  test("reset a unit whose action bar is already 0 keeps it in 0"):
+    val knight: Character = new Knight("Juan", 10, 10, 10, None, Nil)
+    turnScheduler.get.add(knight)
+    turnScheduler.get.reset(knight)
+    assertEquals(turnScheduler.get.actionBarsMap(knight), 0)
+
+  test("reset a unit that is not in the scheduler does not add it"):
+    val knight: Character = new Knight("Juan", 10, 10, 10, None, Nil)
+    turnScheduler.get.reset(knight)
+    assertEquals(turnScheduler.get.actionBarsMap.toMap, Map[UnitsCommon, Int]())
+
+  test("reset a unit that is not in the scheduler does not change the others"):
+    val knight: Character = new Knight("Juan", 10, 10, 10, None, Nil)
+    val enemy: EnemiesContract = new Enemy("Pedro", 20, 20, 20, 50)
+    turnScheduler.get.add(knight)
+    turnScheduler.get.actionBarsMap(knight) = 7
+    turnScheduler.get.reset(enemy)
+    assertEquals(turnScheduler.get.actionBarsMap.toMap, Map[UnitsCommon, Int](knight -> 7))
 //--

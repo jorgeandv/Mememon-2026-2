@@ -14,6 +14,7 @@ trait TurnSchedulerContract {
   def actionBarsMap: mutable.Map[UnitsCommon, Int]
   def reset(units: UnitsCommon): mutable.Map[UnitsCommon, Int]
   def increaseActionBars(k: Int): mutable.Map[UnitsCommon, Int]
+  def statusActionBar(unit: UnitsCommon): Boolean
 }
 
 class TurnScheduler extends TurnSchedulerContract {
@@ -59,6 +60,14 @@ class TurnScheduler extends TurnSchedulerContract {
         actionBars(key) = value + k
       }
     actionBars
+  }
+
+  override def statusActionBar(unit: UnitsCommon): Boolean = {
+    if actionBars.contains(unit) then
+      val maximo: Double = maxActionBarUnit(unit)
+      if actionBars(unit) >= maximo then true
+      else false
+    else false
   }
 }
 

@@ -5,7 +5,9 @@ import model.units.{Archer, Character, EnemiesContract, Enemy, Knight, Thief, Un
 
 import scala.collection.mutable.ArrayBuffer
 import model.combat.{TurnScheduler, TurnSchedulerContract}
-import model.usable.{Weapon, Sword}
+import model.usable.{Sword, Weapon}
+
+import scala.collection.mutable
 
 class TurnSchedulerTest extends munit.FunSuite:
   var turnScheduler: Option[TurnSchedulerContract] = None
@@ -103,7 +105,7 @@ class TurnSchedulerTest extends munit.FunSuite:
     turnScheduler.get.actionBarsMap(knight) = 7
     turnScheduler.get.actionBarsMap(enemy) = 12
     turnScheduler.get.reset(knight)
-    assertEquals(turnScheduler.get.actionBarsMap.toMap, Map[UnitsCommon, Int](knight -> 0, enemy -> 12))
+    assertEquals(turnScheduler.get.actionBarsMap, mutable.Map[UnitsCommon, Int](knight -> 0, enemy -> 12))
 
   //test de los casos limite
   test("reset a unit whose action bar is already 0 keeps it in 0"):
@@ -115,7 +117,7 @@ class TurnSchedulerTest extends munit.FunSuite:
   test("reset a unit that is not in the scheduler does not add it"):
     val knight: Character = new Knight("Juan", 10, 10, 10, None, Nil)
     turnScheduler.get.reset(knight)
-    assertEquals(turnScheduler.get.actionBarsMap.toMap, Map[UnitsCommon, Int]())
+    assertEquals(turnScheduler.get.actionBarsMap, mutable.Map[UnitsCommon, Int]())
 
   test("reset a unit that is not in the scheduler does not change the others"):
     val knight: Character = new Knight("Juan", 10, 10, 10, None, Nil)
@@ -123,5 +125,49 @@ class TurnSchedulerTest extends munit.FunSuite:
     turnScheduler.get.add(knight)
     turnScheduler.get.actionBarsMap(knight) = 7
     turnScheduler.get.reset(enemy)
-    assertEquals(turnScheduler.get.actionBarsMap.toMap, Map[UnitsCommon, Int](knight -> 7))
+    assertEquals(turnScheduler.get.actionBarsMap, mutable.Map[UnitsCommon, Int](knight -> 7))
+//--
+
+
+    //Test of the increaseActionBars method -----
+    //Partition tests
+  test("increaseActionBars increases the action bar of all units by k"):
+    val knight: Character = new Knight("Juan", 10, 10, 10, None, Nil)
+    val enemy: EnemiesContract = new Enemy("Pedro", 20, 20, 20, 50)
+    turnScheduler.get.add(knight)
+    turnScheduler.get.add(enemy)
+    turnScheduler.get.increaseActionBars(5)
+    assertEquals(turnScheduler.get.actionBarsMap, mutable.Map[UnitsCommon, Int](knight -> 5, enemy -> 5))
+
+  test("increaseActionBars adds to the current value of each bar"):
+    val knight: Character = new Knight("Juan", 10, 10, 10, None, Nil)
+    val enemy: EnemiesContract = new Enemy("Pedro", 20, 20, 20, 50)
+    turnScheduler.get.add(knight)
+    turnScheduler.get.add(enemy)
+    turnScheduler.get.actionBarsMap(knight) = 7
+    turnScheduler.get.actionBarsMap(enemy) = 12
+    turnScheduler.get.increaseActionBars(3)
+    assertEquals(turnScheduler.get.actionBarsMap, mutable.Map[UnitsCommon, Int](knight -> 10, enemy -> 15))
+
+
+    //Edge case tests
+  test("increaseActionBars with k = 0 does not change the bars"):
+    val knight: Character = new Knight("Juan", 10, 10, 10, None, Nil)
+    turnScheduler.get.add(knight)
+    turnScheduler.get.actionBarsMap(knight) = 7
+    turnScheduler.get.increaseActionBars(0)
+    assertEquals(turnScheduler.get.actionBarsMap(knight), 7)
+
+  test("increaseActionBars with negative k does not change the bars"):
+    val knight: Character = new Knight("Juan", 10, 10, 10, None, Nil)
+    turnScheduler.get.add(knight)
+    turnScheduler.get.actionBarsMap(knight) = 7
+    turnScheduler.get.increaseActionBars(-1)
+    assertEquals(turnScheduler.get.actionBarsMap(knight), 7)
+
+  test("increaseActionBars with no units does not add anything"):
+    turnScheduler.get.increaseActionBars(5)
+    assertEquals(turnScheduler.get.actionBarsMap, mutable.Map[UnitsCommon, Int]())
+
+
 //--

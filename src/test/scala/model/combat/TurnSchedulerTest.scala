@@ -170,4 +170,38 @@ class TurnSchedulerTest extends munit.FunSuite:
     assertEquals(turnScheduler.get.actionBarsMap, mutable.Map[UnitsCommon, Int]())
 
 
+  //Test of the statusActionBar method -----
+  //Particionbes
+  test("statusActionBar is false when the bar is below the max"):
+    val knight: Character = new Knight("Juan", 10, 10, 10, None, Nil)
+    turnScheduler.get.add(knight)
+    turnScheduler.get.actionBarsMap(knight) = 0
+    assertEquals(turnScheduler.get.statusActionBar(knight), false)
+
+  test("statusActionBar is true when the bar equals the max"):
+    val knight: Character = new Knight("Juan", 10, 10, 10, None, Nil)
+    turnScheduler.get.add(knight)
+    val maximo = turnScheduler.get.maxActionBarUnit(knight)
+    turnScheduler.get.actionBarsMap(knight) = maximo.toInt
+    assertEquals(turnScheduler.get.statusActionBar(knight), true)
+
+  test("statusActionBar is true when the bar exceeds the max"):
+    val knight: Character = new Knight("Juan", 10, 10, 10, None, Nil)
+    turnScheduler.get.add(knight)
+    val maximo = turnScheduler.get.maxActionBarUnit(knight)
+    turnScheduler.get.actionBarsMap(knight) = maximo.toInt + 5
+    assertEquals(turnScheduler.get.statusActionBar(knight), true)
+
+  //Casos limites
+  test("statusActionBar is false when the bar is one below the max"):
+    val knight: Character = new Knight("Juan", 10, 10, 10, None, Nil)
+    turnScheduler.get.add(knight)
+    val maximo = turnScheduler.get.maxActionBarUnit(knight)
+    turnScheduler.get.actionBarsMap(knight) = maximo.toInt - 1
+    assertEquals(turnScheduler.get.statusActionBar(knight), false)
+
+  test("statusActionBar is false for a unit not in the scheduler"):
+    val knight: Character = new Knight("Juan", 10, 10, 10, None, Nil)
+    assertEquals(turnScheduler.get.statusActionBar(knight), false)
+
 //--

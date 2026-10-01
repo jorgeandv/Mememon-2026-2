@@ -11,13 +11,15 @@ trait TurnSchedulerContract {
   def add(unit: UnitsCommon): ArrayBuffer[UnitsCommon]
   def remove(unit: UnitsCommon): ArrayBuffer[UnitsCommon]
   def maxActionBarUnit(unit: UnitsCommon): Double
+  def actionBarsMap: mutable.Map[UnitsCommon, Int]
 }
 
 class TurnScheduler extends TurnSchedulerContract {
   val units: ArrayBuffer[UnitsCommon] = ArrayBuffer[UnitsCommon]()
   //Creo el Map que tendra los pares unidad - barra
-  val actionBarsMap: mutable.Map[UnitsCommon, Int] = mutable.Map[UnitsCommon, Int]()
+  val actionBars: mutable.Map[UnitsCommon, Int] = mutable.Map[UnitsCommon, Int]()
   override def unitsArrayBuffer: ArrayBuffer[UnitsCommon] = units
+  override def actionBarsMap: mutable.Map[UnitsCommon, Int] = actionBars
 
   override def add(unit: UnitsCommon): ArrayBuffer[UnitsCommon] = {
     //Evita duplicados

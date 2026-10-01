@@ -10,9 +10,12 @@ trait TurnSchedulerContract {
 }
 
 class TurnScheduler extends TurnSchedulerContract {
-  override def unitsArrayBuffer: ArrayBuffer[UnitsCommon] = ArrayBuffer[UnitsCommon]()
-  
+  val units: ArrayBuffer[UnitsCommon] = ArrayBuffer[UnitsCommon]()
+  override def unitsArrayBuffer: ArrayBuffer[UnitsCommon] = units
+
   override def add(unit: UnitsCommon): ArrayBuffer[UnitsCommon] = {
-    this.unitsArrayBuffer+=unit
+    //evita duplicados
+    if (!units.contains(unit)) units += unit
+    units
   }
 }

@@ -1,9 +1,11 @@
 package cl.uchile.dcc
 package model.combat
 
-import model.units.{UnitsCommon, Character, Knight, Archer, Thief}
+import model.units.{Archer, Character, EnemiesContract, Enemy, Knight, Thief, UnitsCommon}
+
 import scala.collection.mutable.ArrayBuffer
-import model.combat.{TurnSchedulerContract, TurnScheduler}
+import model.combat.{TurnScheduler, TurnSchedulerContract}
+import model.usable.{Weapon, Sword}
 
 class TurnSchedulerTest extends munit.FunSuite:
   var turnScheduler: Option[TurnSchedulerContract] = None
@@ -63,4 +65,23 @@ class TurnSchedulerTest extends munit.FunSuite:
     turnScheduler.get.add(knight)
     turnScheduler.get.remove(archer)
     assertEquals(turnScheduler.get.unitsArrayBuffer, ArrayBuffer[UnitsCommon](knight))
+//--
+
+    //Test del metodo maxActionBarUnit -----
+    //Test de las particiones
+  test("maxActionBarUnit with an Character"):
+    val sword: Weapon = new Sword("La BESTIA", 10,50, None)
+    val knight: Character = new Knight("Juan", 10, 10, 10, Some(sword), Nil)
+    assertEquals(turnScheduler.get.maxActionBarUnit(knight), 35.0)
+
+  test("maxActionBarUnit with an Enemy"):
+    val enemy: EnemiesContract = new Enemy("Pedro", 20, 20, 20, 50)
+    assertEquals(turnScheduler.get.maxActionBarUnit(enemy), 50.0)
+
+
+    //test de los casos limite
+  test("maxActionBarUnit without weapon"):
+    val knight: Character = new Knight("Juan", 10, 10, 10, None, Nil)
+    assertEquals(turnScheduler.get.maxActionBarUnit(knight), 10.0)
+
 //--

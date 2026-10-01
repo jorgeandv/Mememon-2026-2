@@ -24,5 +24,5 @@ class TurnSchedulerTest extends munit.FunSuite:
   //test de los casos limite
   test("add with zero units"):
     val arrayBufferTest = turnScheduler.get.add()
-    assertEquals(center.get.nearbyPanels(), ArrayBuffer[Int]())
+    assertEquals(arrayBufferTest, ArrayBuffer[Int]())
   //--

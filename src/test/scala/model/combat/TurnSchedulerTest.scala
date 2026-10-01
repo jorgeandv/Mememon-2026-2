@@ -19,16 +19,16 @@ class TurnSchedulerTest extends munit.FunSuite:
     val archer: Character = new Archer("Pedro", 20, 20, 20, None, Nil)
     val thief: Character = new Thief("Diego", 5, 5, 5, None, Nil)
     turnScheduler.get.add(knight)
-    assertEquals(turnScheduler.get.unitsArrayBuffer, ArrayBuffer(knight))
+    assertEquals(turnScheduler.get.unitsArrayBuffer, ArrayBuffer[UnitsCommon](knight))
     turnScheduler.get.add(archer)
-    assertEquals(turnScheduler.get.unitsArrayBuffer, ArrayBuffer(knight, archer))
+    assertEquals(turnScheduler.get.unitsArrayBuffer, ArrayBuffer[UnitsCommon](knight, archer))
     turnScheduler.get.add(thief)
-    assertEquals(turnScheduler.get.unitsArrayBuffer, ArrayBuffer(knight, archer, thief))
+    assertEquals(turnScheduler.get.unitsArrayBuffer, ArrayBuffer[UnitsCommon](knight, archer, thief))
 
   //test de los casos limite
   test("add an existing unit"):
     val knight: Character = new Knight("Juan", 10, 10, 10, None, Nil)
     turnScheduler.get.add(knight)
     turnScheduler.get.add(knight)
-    assertEquals(turnScheduler.get.unitsArrayBuffer, ArrayBuffer(knight))
+    assertEquals(turnScheduler.get.unitsArrayBuffer, ArrayBuffer[UnitsCommon](knight))
   //--

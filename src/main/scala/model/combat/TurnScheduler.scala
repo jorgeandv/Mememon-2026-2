@@ -12,6 +12,7 @@ trait TurnSchedulerContract {
   def remove(unit: UnitsCommon): ArrayBuffer[UnitsCommon]
   def maxActionBarUnit(unit: UnitsCommon): Double
   def actionBarsMap: mutable.Map[UnitsCommon, Int]
+  def reset(units: UnitsCommon): mutable.Map[UnitsCommon, Int]
 }
 
 class TurnScheduler extends TurnSchedulerContract {
@@ -25,7 +26,7 @@ class TurnScheduler extends TurnSchedulerContract {
     //Evita duplicados
     if (!units.contains(unit)) then {
       units += unit
-      actionBarsMap(unit) = 0
+      actionBars(unit) = 0
     }
     units
   }
@@ -33,7 +34,7 @@ class TurnScheduler extends TurnSchedulerContract {
   override def remove(unit: UnitsCommon): ArrayBuffer[UnitsCommon] = {
     //Evita elimianr cuando no hay nada
     units-=unit
-    actionBarsMap-=unit
+    actionBars-=unit
     units
   }
 
@@ -43,5 +44,11 @@ class TurnScheduler extends TurnSchedulerContract {
       case c: Character => c.weight + 0.5*c.weapon.map(_.weight).getOrElse(0)
       case c: EnemiesContract => c.weight
     }
+  }
+
+  override def reset(unit: UnitsCommon): mutable.Map[UnitsCommon, Int] = {
+    //solo reinicia si la unidad está en el programador
+    if (actionBars.contains(unit)) then actionBars(unit) = 0
+    actionBars
   }
 }

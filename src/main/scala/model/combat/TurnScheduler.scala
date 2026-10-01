@@ -7,6 +7,7 @@ import scala.collection.mutable.ArrayBuffer
 trait TurnSchedulerContract {
   def unitsArrayBuffer: ArrayBuffer[UnitsCommon]
   def add(unit: UnitsCommon): ArrayBuffer[UnitsCommon]
+  def remove(unit: UnitsCommon): ArrayBuffer[UnitsCommon]
 }
 
 class TurnScheduler extends TurnSchedulerContract {
@@ -14,8 +15,14 @@ class TurnScheduler extends TurnSchedulerContract {
   override def unitsArrayBuffer: ArrayBuffer[UnitsCommon] = units
 
   override def add(unit: UnitsCommon): ArrayBuffer[UnitsCommon] = {
-    //evita duplicados
-    if (!units.contains(unit)) units += unit
+    //Evita duplicados
+    if (!units.contains(unit)) then units += unit
+    units
+  }
+
+  override def remove(unit: UnitsCommon): ArrayBuffer[UnitsCommon] = {
+    //Evita elimianr cuando no hay nada
+    units-=unit
     units
   }
 }

@@ -42,8 +42,8 @@ class TurnSchedulerTest extends munit.FunSuite:
     turnScheduler.get.add(knight)
     turnScheduler.get.add(archer)
     turnScheduler.get.add(thief)
-    turnScheduler.get.remove(knight)
-    assertEquals(turnScheduler.get.unitsArrayBuffer, ArrayBuffer[UnitsCommon](archer, thief))
+    turnScheduler.get.remove(archer)
+    assertEquals(turnScheduler.get.unitsArrayBuffer, ArrayBuffer[UnitsCommon](knight, thief))
 
   //test de los casos limite
   test("remove with one unit"):
@@ -56,4 +56,11 @@ class TurnSchedulerTest extends munit.FunSuite:
     val knight: Character = new Knight("Juan", 10, 10, 10, None, Nil)
     turnScheduler.get.remove(knight)
     assertEquals(turnScheduler.get.unitsArrayBuffer, ArrayBuffer[UnitsCommon]())
+
+  test("remove a unit that is not in the scheduler"):
+    val knight: Character = new Knight("Juan", 10, 10, 10, None, Nil)
+    val archer: Character = new Archer("Pedro", 20, 20, 20, None, Nil)
+    turnScheduler.get.add(knight)
+    turnScheduler.get.remove(archer)
+    assertEquals(turnScheduler.get.unitsArrayBuffer, ArrayBuffer[UnitsCommon](knight))
 //--

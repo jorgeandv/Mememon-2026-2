@@ -20,8 +20,8 @@ trait TurnSchedulerContract {
 }
 
 class TurnScheduler extends TurnSchedulerContract {
-  val units: ArrayBuffer[UnitsCommon] = ArrayBuffer[UnitsCommon]()
-  val actionBars: mutable.Map[UnitsCommon, Int] = mutable.Map[UnitsCommon, Int]()
+  private val units: ArrayBuffer[UnitsCommon] = ArrayBuffer[UnitsCommon]()
+  private val actionBars: mutable.Map[UnitsCommon, Int] = mutable.Map[UnitsCommon, Int]()
   override def unitsArrayBuffer: ArrayBuffer[UnitsCommon] = units
   override def actionBarsMap: mutable.Map[UnitsCommon, Int] = actionBars
 
@@ -67,7 +67,7 @@ class TurnScheduler extends TurnSchedulerContract {
     else false
   }
 
-  def excedent(unit: UnitsCommon): Double = {
+  private def excedent(unit: UnitsCommon): Double = {
     actionBars(unit) - maxActionBarUnit(unit)
   }
 

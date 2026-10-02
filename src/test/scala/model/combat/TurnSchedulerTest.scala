@@ -256,7 +256,7 @@ class TurnSchedulerTest extends munit.FunSuite:
     turnScheduler.get.add(enemy)
     turnScheduler.get.actionBarsMap(knight) = turnScheduler.get.maxActionBarUnit(knight).toInt
     assertEquals(turnScheduler.get.currentTurn(), Some(knight))
-  
+
   test("currentTurn is None when there are no units"):
     assertEquals(turnScheduler.get.currentTurn(), None)
 

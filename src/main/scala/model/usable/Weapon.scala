@@ -2,28 +2,35 @@ package cl.uchile.dcc
 package model.usable
 
 import model.units.Character
-import model.usable.usableCommon
 
-trait Weapon extends usableCommon:
+trait Weapon extends usableCommon {
   def attack: Int
   def weight: Int
   def owner: Option[Character]
+}
 
-trait MagicWeapon extends Weapon:
+trait MagicWeapon extends Weapon {
   def magicAttack: Int
+}
 
-class Sword(val name: String, val attack: Int, val weight: Int,
-            val owner: Option[Character]) extends Weapon
 
-class Dagger(val name: String, val attack: Int, val weight: Int,
-             val owner: Option[Character]) extends Weapon
+abstract class AbstractWeapon(val name: String, val attack: Int, val weight: Int, val owner: Option[Character]) extends Weapon
 
-class Bow(val name: String, val attack: Int, val weight: Int,
-          val owner: Option[Character]) extends Weapon
+abstract class AbstractMagicWeapon(name: String, attack: Int, weight: Int, owner: Option[Character], val magicAttack: Int)
+  extends AbstractWeapon(name, attack, weight, owner) with MagicWeapon
 
-class Wand(val name: String, val attack: Int, val weight: Int,
-           val owner: Option[Character], val magicAttack: Int) extends MagicWeapon
+class Sword(name: String, attack: Int, weight: Int,
+            owner: Option[Character]) extends AbstractWeapon(name, attack, weight, owner)
 
-class Staff(val name: String, val attack: Int, val weight: Int,
-            val owner: Option[Character], val magicAttack: Int) extends MagicWeapon
+class Dagger(name: String, attack: Int, weight: Int,
+             owner: Option[Character]) extends AbstractWeapon(name, attack, weight, owner)
+
+class Bow(name: String, attack: Int, weight: Int,
+          owner: Option[Character]) extends AbstractWeapon(name, attack, weight, owner)
+
+class Wand(name: String, attack: Int, weight: Int,
+           owner: Option[Character], magicAttack: Int) extends AbstractMagicWeapon(name, attack, weight, owner, magicAttack)
+
+class Staff(name: String, attack: Int, weight: Int,
+            owner: Option[Character], magicAttack: Int) extends AbstractMagicWeapon(name, attack, weight, owner, magicAttack)
 

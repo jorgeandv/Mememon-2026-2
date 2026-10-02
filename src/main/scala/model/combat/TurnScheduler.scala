@@ -16,6 +16,7 @@ trait TurnSchedulerContract {
   def increaseActionBars(k: Int): mutable.Map[UnitsCommon, Int]
   def statusActionBar(unit: UnitsCommon): Boolean
   def completedUnits(): ArrayBuffer[UnitsCommon]
+  def currentTurn(): Option[UnitsCommon]
 }
 
 class TurnScheduler extends TurnSchedulerContract {
@@ -100,6 +101,12 @@ class TurnScheduler extends TurnSchedulerContract {
 
     // Devuelve la lista ya ordenada de mayor a menor excedente
     resultado
+  }
+
+  override def currentTurn(): Option[UnitsCommon] = {
+    val completadas = completedUnits()
+    if completadas.isEmpty then None
+    else Some(completadas(0))
   }
 }
 

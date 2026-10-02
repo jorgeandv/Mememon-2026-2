@@ -1,8 +1,6 @@
 package cl.uchile.dcc
 package model.units
 
-import model.units.UnitsCommon
-
 trait EnemiesContract extends UnitsCommon {
   def attack: Int
 }

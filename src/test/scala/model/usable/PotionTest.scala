@@ -1,7 +1,6 @@
 package cl.uchile.dcc
 package model.usable
 
-import model.usable.*
 
 class PotionTest extends munit.FunSuite:
   var healing: Option[Potion] = None

@@ -12,7 +12,7 @@ trait TurnSchedulerContract {
   def remove(unit: UnitsCommon): ArrayBuffer[UnitsCommon]
   def maxActionBarUnit(unit: UnitsCommon): Double
   def actionBarsMap: mutable.Map[UnitsCommon, Int]
-  def reset(units: UnitsCommon): mutable.Map[UnitsCommon, Int]
+  def reset(unit: UnitsCommon): mutable.Map[UnitsCommon, Int]
   def increaseActionBars(k: Int): mutable.Map[UnitsCommon, Int]
   def statusActionBar(unit: UnitsCommon): Boolean
   def completedUnits(): ArrayBuffer[UnitsCommon]

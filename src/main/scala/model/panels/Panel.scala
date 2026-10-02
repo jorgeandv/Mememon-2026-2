@@ -7,7 +7,7 @@ trait PanelContract {
   def x: Int
   def y: Int
   def units: List[UnitsCommon]
-  def nearbyPanels(): List[Panel]
+  def nearbyPanels(): List[PanelContract]
 }
 
 var PanelsList: List[Panel] = Nil

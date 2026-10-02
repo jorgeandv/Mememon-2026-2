@@ -91,7 +91,7 @@ class TurnScheduler extends TurnSchedulerContract {
         //La unidad que ya está en esa posición tenga un excedente mayor o igual
         //al de la nueva (o sea, la nueva todavía no le gana)
         while (posicion < resultado.length && excedente(resultado(posicion)) >= excedente(unit)) {
-          posicion += 1
+          posicion+=1
         }
 
         // Cuando el while termina, "posicion" es el lugar correcto:

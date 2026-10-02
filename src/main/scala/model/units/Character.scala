@@ -19,25 +19,31 @@ trait MagicCharacter extends Character {
   def mana: Int
 }
 
-
-class Knight(val name: String, val health: Int, val defense: Int, val weight:
-Int, val weapon: Option[Weapon], val utilities: List[String]) extends Character
-
-
-class Archer(val name: String, val health: Int, val defense: Int, val weight:
-Int, val weapon: Option[Weapon], val utilities: List[String]) extends Character
+abstract class AbstractCharacter(val name: String, val health: Int, val defense: Int, val weight: Int, val weapon: Option[Weapon],
+                                 val utilities: List[String]) extends Character
 
 
-class Thief(val name: String, val health: Int, val defense: Int, val weight:
-Int, val weapon: Option[Weapon], val utilities: List[String]) extends Character
+abstract class AbstractMagicCharacter(name: String, health: Int, defense: Int, weight: Int, weapon: Option[Weapon], utilities: List[String],
+                                      val mana: Int) extends AbstractCharacter(name, health, defense, weight, weapon, utilities) with MagicCharacter
+
+class Knight(name: String, health: Int, defense: Int, weight:
+Int, weapon: Option[Weapon], utilities: List[String]) extends AbstractCharacter(name, health, defense, weight, weapon, utilities)
 
 
-class BlackWizard(val name: String, val health: Int, val defense: Int, val weight:
-Int, val weapon: Option[Weapon], val utilities: List[String], val mana: Int) extends MagicCharacter
+class Archer(name: String, health: Int, defense: Int, weight:
+Int, weapon: Option[Weapon], utilities: List[String]) extends AbstractCharacter(name, health, defense, weight, weapon, utilities)
 
 
-class WhiteWizard(val name: String, val health: Int, val defense: Int, val weight:
-Int, val weapon: Option[Weapon], val utilities: List[String], val mana: Int) extends MagicCharacter
+class Thief(name: String, health: Int, defense: Int, weight:
+Int, weapon: Option[Weapon], utilities: List[String]) extends AbstractCharacter(name, health, defense, weight, weapon, utilities)
+
+
+class BlackWizard(name: String, health: Int, defense: Int, weight:
+Int, weapon: Option[Weapon], utilities: List[String], mana: Int) extends AbstractMagicCharacter(name, health, defense, weight, weapon, utilities, mana)
+
+
+class WhiteWizard(name: String, health: Int, defense: Int, weight:
+Int, weapon: Option[Weapon], utilities: List[String], mana: Int) extends AbstractMagicCharacter(name, health, defense, weight, weapon, utilities, mana)
 
 
 

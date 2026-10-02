@@ -15,6 +15,7 @@ trait TurnSchedulerContract {
   def reset(units: UnitsCommon): mutable.Map[UnitsCommon, Int]
   def increaseActionBars(k: Int): mutable.Map[UnitsCommon, Int]
   def statusActionBar(unit: UnitsCommon): Boolean
+  def completedUnits(): ArrayBuffer[UnitsCommon]
 }
 
 class TurnScheduler extends TurnSchedulerContract {
@@ -68,6 +69,37 @@ class TurnScheduler extends TurnSchedulerContract {
       if actionBars(unit) >= maximo then true
       else false
     else false
+  }
+
+  // Calcula cuánto se pasó la unidad del máximo de su barra (barra actual - máximo)
+  def excedente(unit: UnitsCommon): Double = {
+    actionBars(unit) - maxActionBarUnit(unit)
+  }
+
+  override def completedUnits(): ArrayBuffer[UnitsCommon] = {
+    val resultado = ArrayBuffer[UnitsCommon]()
+
+    //Recorre todas las unidades registradas en el scheduler
+    for unit <- actionBars.keys do
+      //Interesan las que completaron su barra de acción
+      if statusActionBar(unit) then
+        //Posición donde se insertará la unidad; parte en 0 (el inicio de la lista)
+        var posicion = 0
+
+        // Avanza mientras:
+        //No se llegue al final de la lista, y
+        //La unidad que ya está en esa posición tenga un excedente mayor o igual
+        //al de la nueva (o sea, la nueva todavía no le gana)
+        while (posicion < resultado.length && excedente(resultado(posicion)) >= excedente(unit)) {
+          posicion += 1
+        }
+
+        // Cuando el while termina, "posicion" es el lugar correcto:
+        // inserta la unidad ahí, desplazando las demás hacia atrás
+        resultado.insert(posicion, unit)
+
+    // Devuelve la lista ya ordenada de mayor a menor excedente
+    resultado
   }
 }
 

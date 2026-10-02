@@ -203,5 +203,44 @@ class TurnSchedulerTest extends munit.FunSuite:
   test("statusActionBar is false for a unit not in the scheduler"):
     val knight: Character = new Knight("Juan", 10, 10, 10, None, Nil)
     assertEquals(turnScheduler.get.statusActionBar(knight), false)
-
 //--
+
+  //Tests of the completedUnits method -----
+  //particiones
+  test("completedUnits is empty when there are no units"):
+    assertEquals(turnScheduler.get.completedUnits(), ArrayBuffer[UnitsCommon]())
+
+  test("completedUnits is empty when no unit completed its bar"):
+    val knight: Character = new Knight("Juan", 10, 10, 10, None, Nil)
+    val enemy: EnemiesContract = new Enemy("Pedro", 20, 20, 20, 50)
+    turnScheduler.get.add(knight)
+    turnScheduler.get.add(enemy)
+    turnScheduler.get.actionBarsMap(knight) = 0
+    turnScheduler.get.actionBarsMap(enemy) = 0
+    assertEquals(turnScheduler.get.completedUnits(), ArrayBuffer[UnitsCommon]())
+
+  test("completedUnits returns only the unit that completed its bar"):
+    val knight: Character = new Knight("Juan", 10, 10, 10, None, Nil)
+    val enemy: EnemiesContract = new Enemy("Pedro", 20, 20, 20, 50)
+    turnScheduler.get.add(knight)
+    turnScheduler.get.add(enemy)
+    turnScheduler.get.actionBarsMap(knight) = turnScheduler.get.maxActionBarUnit(knight).toInt + 3
+    turnScheduler.get.actionBarsMap(enemy) = 0
+    assertEquals(turnScheduler.get.completedUnits(), ArrayBuffer[UnitsCommon](knight))
+
+  test("completedUnits includes a unit with a excedents of exactly 0"):
+    val knight: Character = new Knight("Juan", 10, 10, 10, None, Nil)
+    turnScheduler.get.add(knight)
+    turnScheduler.get.actionBarsMap(knight) = turnScheduler.get.maxActionBarUnit(knight).toInt
+    assertEquals(turnScheduler.get.completedUnits(), ArrayBuffer[UnitsCommon](knight))
+
+  test("completedUnits sorts from highest to lowest excedent"):
+    val knight: Character = new Knight("Juan", 10, 10, 10, None, Nil)
+    val enemy: EnemiesContract = new Enemy("Pedro", 20, 20, 20, 50)
+    turnScheduler.get.add(knight)
+    turnScheduler.get.add(enemy)
+    turnScheduler.get.actionBarsMap(knight) = turnScheduler.get.maxActionBarUnit(knight).toInt + 2
+    turnScheduler.get.actionBarsMap(enemy) = turnScheduler.get.maxActionBarUnit(enemy).toInt + 9
+    assertEquals(turnScheduler.get.completedUnits(), ArrayBuffer[UnitsCommon](enemy, knight))
+
+

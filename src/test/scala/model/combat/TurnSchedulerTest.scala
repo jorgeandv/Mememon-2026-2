@@ -4,7 +4,6 @@ package model.combat
 import model.units.{Archer, Character, EnemiesContract, Enemy, Knight, Thief, UnitsCommon}
 
 import scala.collection.mutable.ArrayBuffer
-import model.combat.{TurnScheduler, TurnSchedulerContract}
 import model.usable.{Sword, Weapon}
 
 import scala.collection.mutable
